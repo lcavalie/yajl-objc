@@ -46,9 +46,9 @@
 
 unsigned char *
 yajl_render_error_string(yajl_handle hand, const unsigned char * jsonText,
-                         unsigned int jsonTextLen, int verbose)
+                         YAJLUInteger jsonTextLen, int verbose)
 {
-    unsigned int offset = hand->bytesConsumed;
+    YAJLUInteger offset = hand->bytesConsumed;
     unsigned char * str;
     const char * errorType = NULL;
     const char * errorText = NULL;
@@ -87,8 +87,8 @@ yajl_render_error_string(yajl_handle hand, const unsigned char * jsonText,
     /* now we append as many spaces as needed to make sure the error
      * falls at char 41, if verbose was specified */
     if (verbose) {
-        unsigned int start, end, i;
-        unsigned int spacesNeeded;
+        YAJLUInteger start, end, i;
+        YAJLUInteger spacesNeeded;
 
         spacesNeeded = (offset < 30 ? 40 - offset : 10);
         start = (offset >= 30 ? offset - 30 : 0);
@@ -137,12 +137,12 @@ yajl_render_error_string(yajl_handle hand, const unsigned char * jsonText,
 
 yajl_status
 yajl_do_parse(yajl_handle hand, const unsigned char * jsonText,
-              unsigned int jsonTextLen)
+              YAJLUInteger jsonTextLen)
 {
     yajl_tok tok;
     const unsigned char * buf;
-    unsigned int bufLen;
-    unsigned int * offset = &(hand->bytesConsumed);
+    YAJLUInteger bufLen;
+    YAJLUInteger * offset = &(hand->bytesConsumed);
 
     *offset = 0;
     

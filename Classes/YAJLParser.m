@@ -125,7 +125,7 @@ int yajl_boolean(void *ctx, int boolVal) {
 //  return 1;
 //}
 
-int ParseDouble(void *ctx, const char *buf, const char *numberVal, unsigned int numberLen) {
+int ParseDouble(void *ctx, const char *buf, const char *numberVal, YAJLUInteger numberLen) {
   double d = strtod((char *)buf, NULL);
   if ((d == HUGE_VAL || d == -HUGE_VAL) && errno == ERANGE) {
     NSString *s = [[NSString alloc] initWithBytes:numberVal length:numberLen encoding:NSUTF8StringEncoding];
@@ -139,7 +139,7 @@ int ParseDouble(void *ctx, const char *buf, const char *numberVal, unsigned int 
   return 1;
 }
 
-int yajl_number(void *ctx, const char *numberVal, unsigned int numberLen) {
+int yajl_number(void *ctx, const char *numberVal, YAJLUInteger numberLen) {
   char buf[numberLen+1];
   memcpy(buf, numberVal, numberLen);
   buf[numberLen] = 0;
@@ -167,14 +167,14 @@ int yajl_number(void *ctx, const char *numberVal, unsigned int numberLen) {
   return 1;
 }
 
-int yajl_string(void *ctx, const unsigned char *stringVal, unsigned int stringLen) {
+int yajl_string(void *ctx, const unsigned char *stringVal, YAJLUInteger stringLen) {
   NSString *s = [[NSString alloc] initWithBytes:stringVal length:stringLen encoding:NSUTF8StringEncoding];
   [(id)ctx _add:s];
   [s release];
   return 1;
 }
 
-int yajl_map_key(void *ctx, const unsigned char *stringVal, unsigned int stringLen) {
+int yajl_map_key(void *ctx, const unsigned char *stringVal, YAJLUInteger stringLen) {
   NSString *s = [[NSString alloc] initWithBytes:stringVal length:stringLen encoding:NSUTF8StringEncoding];
   [(id)ctx _mapKey:s];
   [s release];
@@ -245,7 +245,7 @@ yajl_end_array
 
 //! @endinternal
 
-- (unsigned int)bytesConsumed {
+- (YAJLUInteger)bytesConsumed {
     return handle_ ? yajl_get_bytes_consumed(handle_) : 0;
 }
 

@@ -72,7 +72,7 @@ extern "C" {
     /** a callback used for "printing" the results. */
     typedef void (*yajl_print_t)(void * ctx,
                                  const char * str,
-                                 unsigned int len);
+                                 YAJLUInteger len);
 
     /** configuration structure for the generator */
     typedef struct {
@@ -129,10 +129,10 @@ extern "C" {
     YAJL_API yajl_gen_status yajl_gen_double(yajl_gen hand, double number);
     YAJL_API yajl_gen_status yajl_gen_number(yajl_gen hand,
                                              const char * num,
-                                             unsigned int len);
+                                             YAJLUInteger len);
     YAJL_API yajl_gen_status yajl_gen_string(yajl_gen hand,
                                              const unsigned char * str,
-                                             unsigned int len);
+                                             YAJLUInteger len);
     YAJL_API yajl_gen_status yajl_gen_null(yajl_gen hand);
     YAJL_API yajl_gen_status yajl_gen_bool(yajl_gen hand, int boolean);    
     YAJL_API yajl_gen_status yajl_gen_map_open(yajl_gen hand);
@@ -145,7 +145,7 @@ extern "C" {
      *  buffer.  This allows stream generation. */
     YAJL_API yajl_gen_status yajl_gen_get_buf(yajl_gen hand,
                                               const unsigned char ** buf,
-                                              unsigned int * len);
+                                              YAJLUInteger * len);
 
     /** clear yajl's output buffer, but maintain all internal generation
      *  state.  This function will not "reset" the generator state, and is

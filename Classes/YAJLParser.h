@@ -152,7 +152,7 @@ typedef NSUInteger YAJLParserStatus; //!< Status of the last parse event
 @property (assign, nonatomic) id <YAJLParserDelegate> delegate;
 @property (readonly, retain, nonatomic) NSError *parserError;
 @property (readonly, nonatomic) YAJLParserOptions parserOptions;
-@property (readonly, nonatomic) unsigned int bytesConsumed;
+@property (readonly, nonatomic) YAJLUInteger bytesConsumed;
 
 /*!
  Create parser with data and options.

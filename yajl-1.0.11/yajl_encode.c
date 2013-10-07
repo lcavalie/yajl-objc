@@ -46,7 +46,7 @@ static void CharToHex(unsigned char c, char * hexBuf)
 
 void
 yajl_string_encode(yajl_buf buf, const unsigned char * str,
-                   unsigned int len)
+                   YAJLUInteger len)
 {
     yajl_string_encode2((const yajl_print_t) &yajl_buf_append, buf, str, len);
 }
@@ -55,7 +55,7 @@ void
 yajl_string_encode2(const yajl_print_t print,
                     void * ctx,
                     const unsigned char * str,
-                    unsigned int len)
+                    YAJLUInteger len)
 {
     unsigned int beg = 0;
     unsigned int end = 0;    
@@ -92,7 +92,7 @@ yajl_string_encode2(const yajl_print_t print,
     print(ctx, (const char *) (str + beg), end - beg);
 }
 
-static void hexToDigit(unsigned int * val, const unsigned char * hex)
+static void hexToDigit(YAJLUInteger * val, const unsigned char * hex)
 {
     unsigned int i;
     for (i=0;i<4;i++) {
@@ -104,7 +104,7 @@ static void hexToDigit(unsigned int * val, const unsigned char * hex)
     }
 }
 
-static void Utf32toUtf8(unsigned int codepoint, char * utf8Buf) 
+static void Utf32toUtf8(YAJLUInteger codepoint, char * utf8Buf)
 {
     if (codepoint < 0x80) {
         utf8Buf[0] = (char) codepoint;
@@ -131,10 +131,10 @@ static void Utf32toUtf8(unsigned int codepoint, char * utf8Buf)
 }
 
 void yajl_string_decode(yajl_buf buf, const unsigned char * str,
-                        unsigned int len)
+                        YAJLUInteger len)
 {
-    unsigned int beg = 0;
-    unsigned int end = 0;    
+    YAJLUInteger beg = 0;
+    YAJLUInteger end = 0;
 
     while (end < len) {
         if (str[end] == '\\') {
@@ -151,14 +151,14 @@ void yajl_string_decode(yajl_buf buf, const unsigned char * str,
                 case 'b': unescaped = "\b"; break;
                 case 't': unescaped = "\t"; break;
                 case 'u': {
-                    unsigned int codepoint = 0;
+                    YAJLUInteger codepoint = 0;
                     hexToDigit(&codepoint, str + ++end);
                     end+=3;
                     /* check if this is a surrogate */
                     if ((codepoint & 0xFC00) == 0xD800) {
                         end++;
                         if (str[end] == '\\' && str[end + 1] == 'u') {
-                            unsigned int surrogate = 0;
+                            YAJLUInteger surrogate = 0;
                             hexToDigit(&surrogate, str + end + 2);
                             codepoint =
                                 (((codepoint & 0x3F) << 10) | 
