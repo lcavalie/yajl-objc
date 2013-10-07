@@ -38,21 +38,19 @@ extern NSString *const YAJLParsingUnsupportedException; //! Parsing unsupported 
 extern NSString *const YAJLParserValueKey; //! Key in NSError userInfo for value we errored on
 
 //! Parser error codes
-enum YAJLParserErrorCode {
+typedef enum {
   YAJLParserErrorCodeAllocError = -1000, //!< Alloc error
   YAJLParserErrorCodeDoubleOverflow = -1001, //!< Double overflow
   YAJLParserErrorCodeIntegerOverflow = -1002 //!< Integer overflow
-};
-typedef NSInteger YAJLParserErrorCode; //! Parser error codes
+} YAJLParserErrorCode; //! Parser error codes
 
 //! Parser options
-enum YAJLParserOptions {
+typedef enum {
   YAJLParserOptionsNone = 0, //!< No options
   YAJLParserOptionsAllowComments = 1 << 0, //!< Javascript style comments will be allowed in the input (both /&asterisk; &asterisk;/ and //)
   YAJLParserOptionsCheckUTF8 = 1 << 1, //!< Invalid UTF8 strings will cause a parse error
   YAJLParserOptionsStrictPrecision = 1 << 2, //!< If YES will force strict precision and return integer overflow error
-};
-typedef NSUInteger YAJLParserOptions; //! Parser options
+} YAJLParserOptions; //! Parser options
 
 //! Parser status
 enum {
