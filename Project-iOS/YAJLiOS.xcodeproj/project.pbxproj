@@ -844,7 +844,6 @@
 			baseConfigurationReference = 00C4052E0FE77688003CE908 /* Shared-iOS.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Info copy.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = YAJLiOSSimulator;
 			};
 			name = Debug;
@@ -853,7 +852,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00C4052E0FE77688003CE908 /* Shared-iOS.xcconfig */;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = YAJLiOSSimulator;
 			};
 			name = Release;
