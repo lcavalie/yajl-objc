@@ -122,16 +122,16 @@ NSString *const YAJLGenInvalidObjectException = @"YAJLGenInvalidObjectException"
     yajl_gen_null(gen_);
   } else {
     NSString *s = [number stringValue];
-    YAJLUInteger length = [s lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger length = [s lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     const char *c = [s UTF8String];
-    yajl_gen_number(gen_, c, length);
+    yajl_gen_number(gen_, c, (unsigned int) length);
   }
 }
 
 - (void)string:(NSString *)s {
-  YAJLUInteger length = [s lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+  NSUInteger length = [s lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
   const unsigned char *c = (const unsigned char *)[s UTF8String]; 
-  yajl_gen_string(gen_, c, length);
+  yajl_gen_string(gen_, c, (unsigned int) length);
 }
 
 - (void)startDictionary {
@@ -156,7 +156,7 @@ NSString *const YAJLGenInvalidObjectException = @"YAJLGenInvalidObjectException"
 
 - (NSString *)buffer {
   const unsigned char *buf;  
-  YAJLUInteger len;
+  unsigned int len;
   yajl_gen_get_buf(gen_, &buf, &len); 
   NSString *s = [NSString stringWithUTF8String:(const char*)buf]; 
   return s;
